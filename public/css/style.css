@@ -2,3 +2,15 @@
     margin: auto;
     text-align: center;
 }
+
+.right {
+    text-align: right;
+}
+
+.margin-left {
+    margin-left: 50px;
+}
+
+.margin-right {
+    margin-right: 50px;
+}
