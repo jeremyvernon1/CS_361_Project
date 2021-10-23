@@ -18,6 +18,10 @@
     margin: left;
 }
 
+.right {
+    float: right;
+}
+
 .flexbox-container {
     display: flex;
     justify-content: space-evenly;
@@ -67,8 +71,4 @@
 
 .no-left-border {
     border-left: none;
-}
-
-.grid-inner-item {
-    /* border: 2px dashed green; */
 }
