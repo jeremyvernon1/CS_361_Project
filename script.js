@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars').create({defalutLayout:'main'});
+const mysql = require('./dbcon.js');
 
 // Renders pages
 app.use(express.static('public'));

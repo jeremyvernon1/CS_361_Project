@@ -10,20 +10,34 @@
 </head>
 <body>
     <!-- Header -->
+    <!-- Empty space to block off first 1/3 of width -->
+    <div class="left">
+        <h2></h2> 
+    </div>
+    
+    <!-- Title -->
     <div class="center">
         <h2>Fly Me to the Moon</h2>
     </div>
     
-    <div class="text-right margin-right">
+    <!-- Home link -->
+    <div class="text-right right margin-right margin-top">
     <a href="/"><img src="Home_small.png" alt="Home"></a>
     <a href="/"> Home</a>
     </div>
     
+    <!-- Empty space to block off first 1/3 of width -->
+    <p>&nbsp;</p><p>&nbsp;</p>
+    <div class="left">
+        <h2></h2>
+    </div>
+
+    <!-- Search box -->
     <div class="center">
         <form action="/sitePage1">
             <label for="search">Search for an airport: </label>
-            <input type="text" id="airportSearch" name="airportSearch">
-            <input type="submit" value="Submit">
+            <input type="text" id="airportSearch" name="airportSearch" placeholder="Search...">
+            <input type="submit" value="Search">
         </form>
     </div>
     <p>&nbsp;</p>
