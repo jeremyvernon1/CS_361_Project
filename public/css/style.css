@@ -4,6 +4,11 @@
     text-align: center;
 }
 
+.center2 {
+    display: block;
+    margin: 0 auto;
+}
+
 .text-right {
     text-align: right;
 }
@@ -98,4 +103,10 @@
 
 .large-font{
     font-size: large;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+    bottom: 0;
 }
