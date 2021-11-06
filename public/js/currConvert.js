@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 const receiveAmount = 1;
-const receiveCurrency = "australia";
+const receiveCurrency = "VENEZUELA";
 var conversionFactor = 0;
 const countryArr = [];
 
@@ -11,6 +11,12 @@ class Rates {
         this.rate = rate;
         this.currency = currency;
     }
+}
+
+function properCase(string) {
+    string = string.toLowerCase();
+    string = string.charAt(0).toUpperCase() + string.slice(1);
+    return string;
 }
 
 async function scrapeProduct(url) {
@@ -37,24 +43,36 @@ async function scrapeProduct(url) {
         while(country.charAt(0) == '*') {
             country = country.substring(1);
         }
+        country = properCase(country);
 
         // Get country currency
         var elcurrencyUrl = '//*[@id="content"]/table/tbody/tr[' + i + ']/td[1]';
         [el] = await page.$x(elcurrencyUrl);
         txt = await el.getProperty('innerText');
         currency = await txt.jsonValue();
+        // Pluralize and format name of currency
+        if (rate != 1) {
+            currency = currency + "s";
+        }
+        currency = properCase(currency);
 
-        // Save results in map
-        countryArr[i - 1] = new Rates(country.toLowerCase(), Number(rate), currency.toLowerCase())
+        // Save results in array
+        countryArr[i - 1] = new Rates(country, Number(rate), currency)
         //rates.set(country.toLowerCase(), Number(rate));
     }
     
-    // Convert
-    conversionFactor = countryArr[0].rate;
-    const returnCurrency = receiveAmount * conversionFactor;
+    // 
+    for (i = 0; i < (countryArr.length); i++) {
+        if (receiveCurrency.toLowerCase() == countryArr[i].countryName.toLowerCase()) {
+                // Convert
+                conversionFactor = countryArr[i].rate;
+                const returnCurrAmount = receiveAmount * conversionFactor;
+                const returnCurrType = countryArr[i].currency;
 
-    // Display
-    console.log("\n", returnCurrency, "\n");
+                // Display
+                console.log("\n", returnCurrAmount, returnCurrType, "\n");
+        }
+    }
 
     // End session
     await browser.close();
