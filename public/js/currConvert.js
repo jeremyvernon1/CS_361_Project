@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
-const receiveCurrency = 1;
+const receiveAmount = 1;
+const receiveCurrency = "australia";
 var conversionFactor = 0;
 
 async function scrapeProduct(url) {
@@ -23,29 +24,25 @@ async function scrapeProduct(url) {
         [el] = await page.$x(elcountryUrl);
         txt = await el.getProperty('innerText');
         var country = await txt.jsonValue();
-        // Remove astericks
-        /* Used from stackoverflow.com/questions/4564414/
+        /* Remove astericks. Used from stackoverflow.com/questions/4564414/
         delete-first-character-of-a-string-in-javascript */
         while(country.charAt(0) == '*') {
             country = country.substring(1);
         }
 
         // Save results in map
-        rates.set(country, Number(rate));
+        rates.set(country.toLowerCase(), Number(rate));
     }
     
     // Convert
-    /* conversionFactor = prices[0];
-    const returnCurrency = receiveCurrency * conversionFactor; */
+    conversionFactor = rates.get(receiveCurrency);
+    const returnCurrency = receiveAmount * conversionFactor;
 
     // Display
-    /* for (let j = 0; j < 23; j++) {
-        console.log(j, rates.get(j));
-    } */
-    console.log("\nAustralia: ", rates.get("AUSTRALIA"), "\n");
+    console.log("\n", returnCurrency, "\n");
 
-    // Close
-    browser.close();
+    // End session
+    await browser.close();
 }
 
 // Run scraper
