@@ -48,10 +48,11 @@
 .flexbox-container {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 .flexbox-item {
-    width: 30%;
+    min-width: 30%;
     min-height: 100px;
     /* border: 2px dashed black; */
 }
@@ -73,6 +74,10 @@
     grid-column-end: span 2;
     padding: 1%;
     border: 2px solid black;
+}
+
+.grid-inner-full-column {
+    grid-column-end: span 2;
 }
 
 .grid-item {

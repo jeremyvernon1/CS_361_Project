@@ -1,3 +1,4 @@
+<p>&nbsp;</p>
 {{!-- Flexbox container to setup 3 boxes --}}
 <div class="flexbox-container">
     
@@ -9,7 +10,7 @@
             
             {{!-- First row --}}
             {{!-- Stats --}}
-            <div class="grid-item grid-inner-container">
+            <div class="grid-item grid-inner-container border">
                 
                 {{!-- Location --}}
                 <div> Location: </div>
@@ -27,8 +28,38 @@
                 <div> Landing Fee: </div>
                 <div>
                     <span class="landing-fee-value"></span> 
-                    <button class="float-right">Convert</button>
                 </div>
+
+                <div class="grid-inner-full-column">Convert Currency To:</div>
+                <div>
+                    <select name="toCurrency" id="toCurrency">
+                        <option value=""></option>
+                        <option value="Australia">Australia</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Canada">Canada</option>
+                        <option value="China, P.R.">China, P.R.</option>
+                        <option value="Denmark">Denmark</option>
+                        <option value="EMU Members">Euro</option>
+                        <option value="Hong Kong">Hong Kong</option>
+                        <option value="India">India</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Mexico">Mexico</option>
+                        <option value="New Zealand">New Zealand</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="South Africa">South Africa</option>
+                        <option value="South Korea">South Korea</option>
+                        <option value="Sri Lanka">Sri Lanka</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Switzerland">Switzerland</option>
+                        <option value="Taiwan">Taiwan</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="Venezuela">Venezuela</option>
+                    </select>
+                </div>
+                <div class="center2"><button onclick="convert()">Convert</button></div>
 
                 {{!-- Traffic --}}
                 <div> Traffic: </div>
@@ -44,13 +75,13 @@
             {{!-- Second row --}}
             <div class="grid-full-column">
                 Amenities
-           </div>
+            </div>
 
             {{!-- Third row --}}            
             {{!-- Distance 1 --}}
             <div class="grid-item no-bottom-border no-right-border">
                 Distance from Airport 1 to Airport 2:
-           </div>
+            </div>
             <div class="grid-item no-bottom-border no-left-border">
                 <span class="distance-value-1"></span> miles
            </div>
@@ -98,8 +129,11 @@
                 <div> Landing Fee: </div>
                 <div>
                     <span class="landing-fee-value"></span> 
-                    <button class="float-right">Convert</button>
                 </div>
+
+                <div class="grid-inner-full-column">Convert Currency:</div>
+                <div><button>From</button><button class="float-right">To</button></div>
+                <div><button class="center2">Convert</button></div>
 
                 {{!-- Traffic --}}
                 <div> Traffic: </div>
@@ -168,9 +202,12 @@
                 {{!-- Landing Fee --}}
                 <div> Landing Fee: </div>
                 <div>
-                    <span class="landing-fee-value"></span>
-                    <button class="float-right">Convert</button>
+                    <span class="landing-fee-value"></span> 
                 </div>
+
+                <div class="grid-inner-full-column">Convert Currency:</div>
+                <div><button>From</button><button class="float-right">To</button></div>
+                <div><button class="center2">Convert</button></div>
 
                 {{!-- Traffic --}}
                 <div> Traffic: </div>
@@ -218,3 +255,4 @@
 </div>
 
 <script src="js\dataPage.js"></script>
+<script src="js\currConvert.js"></script>
