@@ -14,6 +14,12 @@ const airport1Info = "Airport 1 Info from teammate's Wikipedia scraper.";
 const airport2Info = "Airport 2 Info from teammate's Wikipedia scraper.";
 const airport3Info = "Airport 3 Info from teammate's Wikipedia scraper.";
 
+function convert() {
+    const getCountries = document.getElementById("toCurrency");
+    const receiveCountry = getCountries.options[getCountries.selectedIndex].value
+    console.log("\n", receiveCountry, "\n");
+}
+
 // Insert content from variables into HTML output
 // Stats block
     // Location
