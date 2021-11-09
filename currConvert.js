@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const receiveAmount = 1;
-const getCountries = document.getElementById("toCurrency");
-const receiveCountry = getCountries.options[getCountries.selectedIndex].value
+// const getCountries = "document.getElementById("toCurrency")";
+const receiveCountry = "Australia";
 var found = false;
 
 // Class for country, rate, and currency type

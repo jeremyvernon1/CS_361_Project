@@ -2,7 +2,7 @@
 const locationValue = "Here";
 const gpsValue = "GPS Coordinates";
 const elevation = "Elevation value";
-const landingFee = "$250.00";
+var landingFee = "$250.00";
 const trafficValue = "High";
 const photo1 = "Photo of Airport 1";
 const photo2 = "Photo of Airport 2";
@@ -18,6 +18,13 @@ function convert() {
     const getCountries = document.getElementById("toCurrency");
     const receiveCountry = getCountries.options[getCountries.selectedIndex].value
     console.log("\n", receiveCountry, "\n");
+    
+    var newRequest = new XMLHttpRequest();
+    newRequest.open('GET', '', true);
+    newRequest.onload = function() {
+        console.log(newRequest.responseText);
+    }
+    newRequest.send(receiveCountry);
 }
 
 // Insert content from variables into HTML output
