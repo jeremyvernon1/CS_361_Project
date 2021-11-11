@@ -20,7 +20,7 @@ function convert() {
     console.log("\n", receiveCountry, "\n");
     
     var newRequest = new XMLHttpRequest();
-    newRequest.open('GET', '', true);
+    newRequest.open('GET', 'http://flip3.engr.oregonstate.edu:4241/', true);
     newRequest.onload = function() {
         console.log(newRequest.responseText);
     }
