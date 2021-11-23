@@ -10,22 +10,25 @@ const photo3 = "Photo of Airport 3";
 const distance1 = 50;
 const distance2 = 100;
 const distance3 = 75;
-const airport1Info = "Airport 1 Info from teammate's Wikipedia scraper.";
+var airport1Info = "Airport 1 Info from teammate's Wikipedia scraper."; //"Airport 1 Info from teammate's Wikipedia scraper."
 const airport2Info = "Airport 2 Info from teammate's Wikipedia scraper.";
 const airport3Info = "Airport 3 Info from teammate's Wikipedia scraper.";
 
-function convert() {
+async function convert() {
     const getCountries = document.getElementById("toCurrency");
     const receiveCountry = getCountries.options[getCountries.selectedIndex].value
-    console.log("\n", receiveCountry, "\n");
     
-    var newRequest = new XMLHttpRequest();
-    newRequest.open('GET', 'http://flip3.engr.oregonstate.edu:4241/', true);
-    newRequest.onload = function() {
-        console.log(newRequest.responseText);
-    }
-    newRequest.send(receiveCountry);
-}
+    const baseConvertUrl = 'http://flip3.engr.oregonstate.edu:4241/?';
+    var convertUrl = baseConvertUrl + receiveCountry + "=" + 250
+    
+    let response2 = await fetch(convertUrl);
+
+    landingFee = await response2.json();
+    for (var i= 0; i < document.getElementsByClassName('landing-fee-value').length; i++) {
+        document.getElementsByClassName('landing-fee-value')[i].textContent = 
+            landingFee.amount + " " + landingFee.currency;
+    };
+};
 
 // Insert content from variables into HTML output
 // Stats block
@@ -33,7 +36,8 @@ function convert() {
 if(locationValue !== null) {
     for (var i= 0; i < document.getElementsByClassName('location-value').length; i++) {
         document.getElementsByClassName('location-value')[i].textContent = locationValue;
-    }};
+    }
+};
     
     // GPS
 if(gpsValue !== null) {
@@ -50,7 +54,7 @@ if(elevation !== null) {
     // Landing Fee
 if(landingFee !== null) {
     for (var i= 0; i < document.getElementsByClassName('landing-fee-value').length; i++) {
-        document.getElementsByClassName('landing-fee-value')[i].textContent = landingFee;
+        document.getElementsByClassName('landing-fee-value')[i].textContent = landingFee.amount;
     }};
     
     // Traffic
@@ -81,38 +85,48 @@ if(photo2 !== null) {
 // Distance
     // Distance between Airport 1 and Airport 2
 if(distance1 !== null) {
-for (var i= 0; i < document.getElementsByClassName('distance-value-1').length; i++) {
-document.getElementsByClassName('distance-value-1')[i].textContent = distance1;
+    for (var i= 0; i < document.getElementsByClassName('distance-value-1').length; i++) {
+    document.getElementsByClassName('distance-value-1')[i].textContent = distance1;
 }};
 
     // Distance between Airport 1 and Airport 3
 if(distance2 !== null) {
-for (var i= 0; i < document.getElementsByClassName('distance-value-2').length; i++) {
-document.getElementsByClassName('distance-value-2')[i].textContent = distance2;
+    for (var i= 0; i < document.getElementsByClassName('distance-value-2').length; i++) {
+    document.getElementsByClassName('distance-value-2')[i].textContent = distance2;
 }};
 
     // Distance between Airport 2 and Airport 3
 if(distance3 !== null) {
-for (var i= 0; i < document.getElementsByClassName('distance-value-3').length; i++) {
-document.getElementsByClassName('distance-value-3')[i].textContent = distance3;
+    for (var i= 0; i < document.getElementsByClassName('distance-value-3').length; i++) {
+    document.getElementsByClassName('distance-value-3')[i].textContent = distance3;
 }};
-         
+
+async function wikiGet(num, wikiUrl) {
+    const scraperUrl = 
+    'http://flip3.engr.oregonstate.edu:6231/?article=';
+
+    let response = await fetch(scraperUrl + wikiUrl);
+    airportInfo = await response.json();
+    for (var i= 0; i < document.getElementsByClassName('airport-info-1').length; i++) {
+        document.getElementsByClassName('airport-info-' + num)[i].textContent = airportInfo.info;
+    };
+};
+
 // Airport Info
     // Airport 1
 if(airport1Info !== null) {
-    for (var i= 0; i < document.getElementsByClassName('airport-info-1').length; i++) {
-    document.getElementsByClassName('airport-info-1')[i].textContent = airport1Info;
-    }};
+    var wikiUrl1 = 'Montgomery_Regional_Airport';
+    wikiGet(1, wikiUrl1);
+};
     
     // Airport 2
 if(airport2Info !== null) {
-    for (var i= 0; i < document.getElementsByClassName('airport-info-2').length; i++) {
-    document.getElementsByClassName('airport-info-2')[i].textContent = airport2Info;
-    }};
+    var wikiUrl2 = 'Huntsville_International_Airport';
+    wikiGet(2, wikiUrl2);
+};
     
     // Airport 3
 if(airport3Info !== null) {
-    for (var i= 0; i < document.getElementsByClassName('airport-info-3').length; i++) {
-    document.getElementsByClassName('airport-info-3')[i].textContent = airport3Info;
-    }};
-     
+    var wikiUrl3 = 'Anchorage_International_Airport';
+    wikiGet(3, wikiUrl3);
+};
