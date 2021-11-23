@@ -2,20 +2,25 @@
   "name": "project",
   "version": "1.0.0",
   "description": "CS 361 Project",
-  "main": "script.js",
+  "main": "currConvert.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeremyvernon1/CS_361_Project.git"
+  },
   "author": "Jeremy Vernon",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeremyvernon1/CS_361_Project/issues"
+  },
+  "homepage": "https://github.com/jeremyvernon1/CS_361_Project#readme",
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.3.4",
     "forever": "^4.0.1",
-    "git": "^0.1.5",
     "handlebars": "^4.7.7",
-    "mysql": "^2.18.1",
-    "node": "^16.11.1",
-    "puppeteer": "^11.0.0"
+    "mysql": "^2.18.1"
   }
 }
