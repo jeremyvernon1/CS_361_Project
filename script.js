@@ -6,8 +6,10 @@ const mysql = require('./dbcon.js');
 // Renders pages
 app.use(express.static('public'));
 app.use(express.static('images'));
+app.use(express.json());
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
+app.set('mysql', mysql);
 app.set('port', process.argv[2]);
 
 
