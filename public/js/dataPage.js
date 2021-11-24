@@ -30,19 +30,6 @@ async function convert() {
     };
 };
 
-function getAirports(res, mysql, context, complete){
-    mysql.pool.query("SELECT * FROM airports", function(error, results, fields){
-        // SELECT customer_id as id, first_name, last_name, birthdate, street, city, state, zip, phone
-        // FROM Customers WHERE customer_id = ?";
-        if(error){
-            res.write(JSON.stringify(error));
-            res.end();
-        }
-        context.airports  = results;
-        complete();
-    });
-}
-
 // Insert content from variables into HTML output
 // Stats block
     // Location

@@ -3,6 +3,18 @@
     <h3>Browse Popular US Airports</h3>
 </div>
 
+<div>
+    <tbody>
+        <p>MySQL Results Here: </p>
+        {{#each name}}
+        <tr> 
+            <td>{{.}}</td>
+        </tr> 
+        {{/each}}
+    </tbody>
+</div>
+{{#each foo}}{{.}}{{/each}}
+
 <div class="margin-left">
     <p>Jump to a state: 
         <a href="#stateA">A</a>
