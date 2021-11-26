@@ -12,35 +12,48 @@ app.set('view engine', 'handlebars');
 app.set('mysql', mysql);
 app.set('port', process.argv[2]);
 
-function getAirports(res, mysql, airports){
-    var testArr0 = { "foo":
-        ["Hello", " ", "World", "!"]
-    };
-    var testArr1 = {"name":["John"], "age":30, "car":null}
-    /* mysql.pool.query("SELECT * FROM airports", function(error, results){
+
+function getAirports(res, mysql, context){
+    var callbackCount = 0;
+    mysql.pool.query("SELECT * FROM airports", function(error, results){
         if(error){
             console.log("Error in mySQL.", error);
         }
-        airports = results;
-        console.log("Airport1: ", airports[0].name);
-    }); */
-    // console.log("Test1: ", testArr[0]);
-    res.render('sitePage2', testArr1);
+        context.airports = results;
+        callbackCount++;
+        if (callbackCount > 0) {
+            res.render('sitePage2', context);
+        }
+    })
 }
 
+function getAirportsByState(res, mysql, context){
+    var callbackCount = 0;
+    mysql.pool.query("SELECT * FROM airports WHERE iso_region = 'US-AL'", function(error, results){
+        if(error){
+            console.log("Error in mySQL.", error);
+        }
+        context.airports1 = results;
+        callbackCount++;
+        if (callbackCount > 0) {
+            res.render('sitePage1', context);
+        }
+    })
+}
 
 app.get('/', (req, res) => {
     res.render('home');
 });
 
 app.get('/sitePage1', (req, res) => {
-    res.render('sitePage1');
+    var context = {};
+    var mysql = req.app.get('mysql');
+    //getAirports(res, mysql, context);
+    getAirportsByState(res, mysql, context);
 });
 
 app.get('/sitePage2', (req, res) => {
-    var airports = {};
-    var mysql = req.app.get('mysql');
-    getAirports(res, mysql, airports);
+    res.render('sitePage2');
 });
 
 app.get('/sitePage3', (req, res) => {

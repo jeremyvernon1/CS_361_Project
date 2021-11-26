@@ -3,36 +3,31 @@
     <h4>Select up to 3 airports to view and compare</h4>
 </div>
 
+<div class="text-center sticky">
+    <p>&nbsp;</p>
+    {{!-- <form action="/sitePage3"> --}}
+        {{!-- <input type="submit" value="Compare"> --}}
+    {{!-- </form> --}}
+    <button onclick="compare()">Compare</button>
+</div>
+
 <div class="margin-left">
     <h4>Search results:</h4>
     <br />
 </div>
 
-
 <!-- Results show here -->
 <div class="margin-left">
-
+    {{#each airports1}}
     <input type="checkbox" id="searchR1" name="searchR1" value="Montgomery">
-    <label for="searchR1">Montgomery Airport</label><br />
+    <label for="searchR1">{{name}}</label><br />
     <p>&nbsp;</p>
-    
-    <input type="checkbox" id="searchR2" name="searchR2" value="Huntsville">
-    <label for="searchR2">Huntsville Airport</label><br />
-    <p>&nbsp;</p>
-    
-    <input type="checkbox" id="searchR3" name="searchR3" value="Anchorage">
-    <label for="searchR3">Anchorage Airport</label><br />
-    <p>&nbsp;</p>
-    
-    <input type="checkbox" id="searchR4" name="searchR4" value="Fairbanks">
-    <label for="searchR4">Fairbanks Airport</label><br />
-    <p>&nbsp;</p>
+    {{/each}}
 </div>
 
-<div class="center">
-    <p>&nbsp;</p>
-    <form action="/sitePage3">
-        <input type="submit" value="Compare">
+<div class="text-center sticky">
+    <form action="#top">
+        <input type="submit" value="Top of page">
     </form>
     <p>&nbsp;</p>
 </div>
