@@ -27,10 +27,9 @@ function getAirports(res, mysql, context){
     })
 };
 
-function getAirportsByState(res, mysql, context){
+function getAirportsByState(res, mysql, selectedState, context){
     var callbackCount = 0;
-    var state = "'US-AL'";
-    mysql.pool.query("SELECT * FROM airports WHERE iso_region = " + state,
+    mysql.pool.query("SELECT * FROM airports WHERE iso_region = " + selectedState,
         function(error, results){
             if(error){
                 console.log("Error in mySQL.", error);
@@ -66,8 +65,14 @@ app.get('/', (req, res) => {
 app.get('/sitePage1', (req, res) => {
     var context = {};
     var mysql = req.app.get('mysql');
-    var searchString = "'" + req.query.airportSearch + "%" + "'";
-    getAirportsBySearch(res, mysql, searchString, context);
+    if (req.query.airportSearch) {
+        var searchString = "'" + req.query.airportSearch + "%" + "'";
+        getAirportsBySearch(res, mysql, searchString, context);
+    }
+    if (req.query.stateSearch) {
+        var selectedState = "'" + req.query.stateSearch + "'";
+        getAirportsByState(res, mysql, selectedState, context);
+    }
 });
 
 app.get('/sitePage2', (req, res) => {
