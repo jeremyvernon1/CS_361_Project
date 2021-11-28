@@ -6,7 +6,8 @@ const photo3 = "Photo of Airport 3";
 const distance1 = 50;
 const distance2 = 100;
 const distance3 = 75;
-var airport1Info = "Airport 1 Info from teammate's Wikipedia scraper."; //"Airport 1 Info from teammate's Wikipedia scraper."
+var wikiUrl1 = document.getElementById("wikiInfo").textContent;
+var airport1Info = "";
 const airport2Info = "Airport 2 Info from teammate's Wikipedia scraper.";
 const airport3Info = "Airport 3 Info from teammate's Wikipedia scraper.";
 
@@ -27,6 +28,9 @@ async function convert() {
 };
 
 // Insert content from variables into HTML output
+for (var i= 0; i < document.getElementsByClassName('landing-fee-value').length; i++) {
+    document.getElementsByClassName('landing-fee-value')[i].textContent = landingFee;
+};
 
 // Photo
     // Photo in Airport 1
@@ -67,10 +71,14 @@ async function wikiGet(num, wikiUrl) {
 
 // Airport Info
     // Airport 1
-if(airport1Info !== null) {
-    var wikiUrl1 = 'Montgomery_Regional_Airport';
+if(wikiUrl1 !== "") {
+    wikiUrl1 = wikiUrl1.trim();
+    wikiUrl1 = wikiUrl1.slice(30);
+    console.log("wikiUrl1: ", wikiUrl1);
     wikiGet(1, wikiUrl1);
-};
+} else {
+    console.log("Empty string detected.");
+}
     
     // Airport 2
 if(airport2Info !== null) {

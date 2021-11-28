@@ -68,12 +68,12 @@
                 <div> Traffic: </div>
                 <div> {{type}} </div>
 
-           </div>
+            </div>
             
             {{!-- Photo --}}
             <div class="grid-item">
                 <span class="photo-1"></span>
-           </div>
+            </div>
 
             {{!-- Second row --}}
             <div class="grid-full-column">
@@ -87,20 +87,23 @@
             </div>
             <div class="grid-item no-bottom-border no-left-border">
                 <span class="distance-value-1"></span> miles
-           </div>
+            </div>
             
             {{!-- Distance 2 --}}
             <div class="grid-item no-top-border no-right-border">
                 Distance from Airport 1 to Airport 3:
-           </div>
+            </div>
             <div class="grid-item no-top-border no-left-border">
                 <span class="distance-value-2"></span> miles
-           </div>
+            </div>
 
             {{!-- Fourth row --}}
-            <div class="grid-full-column">
-                <span class="airport-info-1"></span>
-           </div>
+            <div id="wikiInfo" class="grid-full-column">
+                {{wikipedia_link}}
+                <p>
+                    <span class="airport-info-1"></span>
+                </p>
+            </div>
         {{!-- End grid container within flexbox --}}
        </div>
     {{!-- End Airport 1 --}}
