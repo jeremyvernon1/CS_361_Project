@@ -5,9 +5,6 @@
 
 <div class="text-center sticky">
     <p>&nbsp;</p>
-    {{!-- <form action="/sitePage3"> --}}
-        {{!-- <input type="submit" value="Compare"> --}}
-    {{!-- </form> --}}
     <button onclick="compare()">Compare</button>
 </div>
 
@@ -18,11 +15,13 @@
 
 <!-- Results show here -->
 <div class="margin-left">
-    {{#each airports}}
-    <input type="checkbox" id={{id}} name="resultListing" value={{id}}>
-    <label for="searchR1">{{name}}</label><br />
-    <p>&nbsp;</p>
-    {{/each}}
+    <form id="searchResults">
+        {{#each airports}}
+        <input type="checkbox" id={{ident}} name="resultListing" value={{ID}}>
+        <label for="searchR1">{{name}}</label><br />
+        <p>&nbsp;</p>
+        {{/each}}
+    </form>
 </div>
 
 <div class="text-center sticky">
@@ -33,3 +32,4 @@
 </div>
 
 <script src="js\searchResultsPage.js"></script>
+<script src="js\compare.js"></script>
