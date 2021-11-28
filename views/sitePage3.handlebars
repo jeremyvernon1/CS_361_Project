@@ -1,13 +1,12 @@
 <p>&nbsp;</p>
 
-
-
 {{!-- Flexbox container to setup 3 boxes --}}
 <div class="flexbox-container">
-    
+
+    {{#each airports}}
     {{!-- Airport 1 --}}
     <div class="flexbox-item">
-        <h3 class="text-center">Airport 1</h3>
+        <h3 class="text-center">{{name}}</h3>
         {{!-- Grid container within flexbox --}}
         <div class="grid-container">
             
@@ -17,19 +16,20 @@
                 
                 {{!-- Location --}}
                 <div> Location: </div>
-                <div> <span class="location-value"></span> </div>
+                <div> {{iso_region}} {{municipality}} </div>
                 
                 {{!-- GPS --}}
-                <div> GPS: </div>
-                <div> <span class="gps-value"></span> </div>
+                <div> GPS Code: </div>
+                <div> {{gps_code}} </div>
 
                 {{!-- Elevation --}}
                 <div> Elevation: </div>
-                <div> <span class="elevation-value"></span> </div>
+                <div> {{elevation_ft}} </div>
 
                 {{!-- Landing Fee --}}
                 <div> Landing Fee: </div>
                 <div>
+
                     <span class="landing-fee-value" id="landing-fee-value"></span> 
                 </div>
 
@@ -66,7 +66,7 @@
 
                 {{!-- Traffic --}}
                 <div> Traffic: </div>
-                <div> <span class="traffic-value"></span> </div>
+                <div> {{type}} </div>
 
            </div>
             
@@ -104,209 +104,8 @@
         {{!-- End grid container within flexbox --}}
        </div>
     {{!-- End Airport 1 --}}
-   </div>
-
-    {{!-- Airport 2 --}}
-    <div class="flexbox-item">
-        <h3 class="text-center">Airport 2</h3>
-        {{!-- Grid container within flexbox --}}
-        <div class="grid-container">
-            
-            {{!-- First row --}}
-            {{!-- Stats --}}
-            <div class="grid-item grid-inner-container">
-                
-                {{!-- Location --}}
-                <div> Location: </div>
-                <div> <span class="location-value"></span> </div>
-                
-                {{!-- GPS --}}
-                <div> GPS: </div>
-                <div> <span class="gps-value"></span> </div>
-
-                {{!-- Elevation --}}
-                <div> Elevation: </div>
-                <div> <span class="elevation-value"></span> </div>
-
-                {{!-- Landing Fee --}}
-                <div> Landing Fee: </div>
-                <div>
-                    <span class="landing-fee-value" id="landing-fee-value"></span> 
-                </div>
-
-                <div class="grid-inner-full-column">Convert Currency To:</div>
-                <div>
-                    <select name="toCurrency" id="toCurrency">
-                        <option value=""></option>
-                        <option value="Australia">Australia</option>
-                        <option value="Brazil">Brazil</option>
-                        <option value="Canada">Canada</option>
-                        <option value="China, P.R.">China, P.R.</option>
-                        <option value="Denmark">Denmark</option>
-                        <option value="EMU Members">Euro</option>
-                        <option value="Hong Kong">Hong Kong</option>
-                        <option value="India">India</option>
-                        <option value="Japan">Japan</option>
-                        <option value="Malaysia">Malaysia</option>
-                        <option value="Mexico">Mexico</option>
-                        <option value="New Zealand">New Zealand</option>
-                        <option value="Norway">Norway</option>
-                        <option value="Singapore">Singapore</option>
-                        <option value="South Africa">South Africa</option>
-                        <option value="South Korea">South Korea</option>
-                        <option value="Sri Lanka">Sri Lanka</option>
-                        <option value="Sweden">Sweden</option>
-                        <option value="Switzerland">Switzerland</option>
-                        <option value="Taiwan">Taiwan</option>
-                        <option value="Thailand">Thailand</option>
-                        <option value="United Kingdom">United Kingdom</option>
-                        <option value="Venezuela">Venezuela</option>
-                    </select>
-                </div>
-                <div class="center2"><button onclick="convert()">Convert</button></div>
-
-                {{!-- Traffic --}}
-                <div> Traffic: </div>
-                <div> <span class="traffic-value"></span> </div>
-
-           </div>
-            
-            {{!-- Photo --}}
-            <div class="grid-item">
-                <span class="photo-2"></span>
-           </div>
-
-            {{!-- Second row --}}
-            <div class="grid-full-column">
-                Amenities
-           </div>
-
-            {{!-- Third row --}}            
-            {{!-- Distance 1 --}}
-            <div class="grid-item no-bottom-border no-right-border">
-                Distance from Airport 2 to Airport 1:
-           </div>
-            <div class="grid-item no-bottom-border no-left-border">
-                <span class="distance-value-1"></span> miles
-           </div>
-            
-            {{!-- Distance 2 --}}
-            <div class="grid-item no-top-border no-right-border">
-                Distance from Airport 2 to Airport 3:
-           </div>
-            <div class="grid-item no-top-border no-left-border">
-                <span class="distance-value-3"></span> miles
-           </div>
-
-            {{!-- Fourth row --}}
-            <div class="grid-full-column">
-                <span class="airport-info-2"></span>
-           </div>
-        {{!-- End grid container within flexbox --}}
-       </div>
-    {{!-- End Airport 2 --}}
-   </div>
-
-    {{!-- Airport 3 --}}
-    <div class="flexbox-item">
-        <h3 class="text-center">Airport 3</h3>
-        {{!-- Grid container within flexbox --}}
-        <div class="grid-container">
-            
-            {{!-- First row --}}
-            {{!-- Stats --}}
-            <div class="grid-item grid-inner-container">
-                
-                {{!-- Location --}}
-                <div> Location: </div>
-                <div> <span class="location-value"></span> </div>
-                
-                {{!-- GPS --}}
-                <div> GPS: </div>
-                <div> <span class="gps-value"></span> </div>
-
-                {{!-- Elevation --}}
-                <div> Elevation: </div>
-                <div> <span class="elevation-value"></span> </div>
-
-                {{!-- Landing Fee --}}
-                <div> Landing Fee: </div>
-                <div>
-                    <span class="landing-fee-value" id="landing-fee-value"></span> 
-                </div>
-
-                <div class="grid-inner-full-column">Convert Currency To:</div>
-                <div>
-                    <select name="toCurrency" id="toCurrency">
-                        <option value=""></option>
-                        <option value="Australia">Australia</option>
-                        <option value="Brazil">Brazil</option>
-                        <option value="Canada">Canada</option>
-                        <option value="China, P.R.">China, P.R.</option>
-                        <option value="Denmark">Denmark</option>
-                        <option value="EMU Members">Euro</option>
-                        <option value="Hong Kong">Hong Kong</option>
-                        <option value="India">India</option>
-                        <option value="Japan">Japan</option>
-                        <option value="Malaysia">Malaysia</option>
-                        <option value="Mexico">Mexico</option>
-                        <option value="New Zealand">New Zealand</option>
-                        <option value="Norway">Norway</option>
-                        <option value="Singapore">Singapore</option>
-                        <option value="South Africa">South Africa</option>
-                        <option value="South Korea">South Korea</option>
-                        <option value="Sri Lanka">Sri Lanka</option>
-                        <option value="Sweden">Sweden</option>
-                        <option value="Switzerland">Switzerland</option>
-                        <option value="Taiwan">Taiwan</option>
-                        <option value="Thailand">Thailand</option>
-                        <option value="United Kingdom">United Kingdom</option>
-                        <option value="Venezuela">Venezuela</option>
-                    </select>
-                </div>
-                <div class="center2"><button onclick="convert()">Convert</button></div>
-
-                {{!-- Traffic --}}
-                <div> Traffic: </div>
-                <div> <span class="traffic-value"></span> </div>
-
-           </div>
-            
-            {{!-- Photo --}}
-            <div class="grid-item">
-                <span class="photo-3"></span>
-           </div>
-
-            {{!-- Second row --}}
-            <div class="grid-full-column">
-                Amenities
-           </div>
-
-            {{!-- Third row --}}            
-            {{!-- Distance 1 --}}
-            <div class="grid-item no-bottom-border no-right-border">
-                Distance from Airport 3 to Airport 1:
-           </div>
-            <div class="grid-item no-bottom-border no-left-border">
-                <span class="distance-value-2"></span> miles
-           </div>
-            
-            {{!-- Distance 2 --}}
-            <div class="grid-item no-top-border no-right-border">
-                Distance from Airport 3 to Airport 2:
-           </div>
-            <div class="grid-item no-top-border no-left-border">
-                <span class="distance-value-3"></span> miles
-           </div>
-
-            {{!-- Fourth row --}}
-            <div class="grid-full-column">
-                <span class="airport-info-3"></span>
-           </div>
-        {{!-- End grid container within flexbox --}}
-       </div>
-    {{!-- End Airport 3 --}}
-   </div>
+    </div>
+    {{/each}}
 
 {{!-- End flexbox container --}}
 </div>

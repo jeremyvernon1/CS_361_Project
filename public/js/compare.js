@@ -15,9 +15,15 @@ function compare() {
     
     // Route to new page
     var resultValues = "";
-    for (i = 0; i < 3; i++) {
-        tempValue = "?airport" + i + "=" + checkedArr[i];
+    if (checkedArr[0]) {
+        tempValue = "?airport0=" + checkedArr[0];
         resultValues += tempValue;
+    }
+    for (i = 1; i < 3; i++) {
+        if (checkedArr[i]) {
+            tempValue = "&airport" + i + "=" + checkedArr[i];
+            resultValues += tempValue;
+        }
     }
     window.location.href = "/sitePage3" + resultValues;
 }

@@ -29,7 +29,7 @@ function getAirports(res, mysql, context){
 
 function getAirportsByState(res, mysql, selectedState, context){
     var callbackCount = 0;
-    mysql.pool.query("SELECT * FROM airports WHERE iso_region = " + selectedState,
+    mysql.pool.query("SELECT name, ID FROM airports WHERE iso_region = " + selectedState,
         function(error, results){
             if(error){
                 console.log("Error in mySQL.", error);
@@ -44,7 +44,7 @@ function getAirportsByState(res, mysql, selectedState, context){
 
 function getAirportsBySearch(res, mysql, searchString, context){
     var callbackCount = 0;
-    mysql.pool.query("SELECT * FROM airports WHERE name LIKE " + searchString,
+    mysql.pool.query("SELECT name, ID FROM airports WHERE name LIKE " + searchString,
         function(error, results){
             if(error){
                 console.log("Error in mySQL.", error);
@@ -55,6 +55,23 @@ function getAirportsBySearch(res, mysql, searchString, context){
                 res.render('sitePage1', context);
         }
     })
+};
+
+function getAirportsByID(res, mysql, selectedResults, context){
+    var callbackCount = 0;
+
+    mysql.pool.query("SELECT * FROM airports WHERE ID in (" + selectedResults + ")",
+        function(error, results){
+            if(error){
+                console.log("Error in mySQL.", error);
+            }
+            context.airports = results;
+            callbackCount++;
+            if (callbackCount > 0) {
+                res.render('sitePage3', context);
+            }
+        }
+    )
 };
 
 
@@ -80,7 +97,13 @@ app.get('/sitePage2', (req, res) => {
 });
 
 app.get('/sitePage3', (req, res) => {
-    res.render('sitePage3');
+    var context = {};
+    var mysql = req.app.get('mysql');
+    var selectedResults = Object.values(req.query);
+    getAirportsByID(res, mysql, selectedResults, context);
+    if (!req.query.airport0) {
+        res.render('sitePage3'); // No results found page?
+    }
 });
 
 app.use((req, res) => {

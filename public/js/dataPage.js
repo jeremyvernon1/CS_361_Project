@@ -1,9 +1,5 @@
 // Declare variables
-const locationValue = "Here";
-const gpsValue = "GPS Coordinates";
-const elevation = "Elevation value";
 var landingFee = "$250.00";
-const trafficValue = "High";
 const photo1 = "Photo of Airport 1";
 const photo2 = "Photo of Airport 2";
 const photo3 = "Photo of Airport 3";
@@ -31,37 +27,6 @@ async function convert() {
 };
 
 // Insert content from variables into HTML output
-// Stats block
-    // Location
-if(locationValue !== null) {
-    for (var i= 0; i < document.getElementsByClassName('location-value').length; i++) {
-        document.getElementsByClassName('location-value')[i].textContent = locationValue;
-    }
-};
-    
-    // GPS
-if(gpsValue !== null) {
-    for (var i= 0; i < document.getElementsByClassName('gps-value').length; i++) {
-        document.getElementsByClassName('gps-value')[i].textContent = gpsValue;
-    }};
-    
-    // Elevation
-if(elevation !== null) {
-    for (var i= 0; i < document.getElementsByClassName('elevation-value').length; i++) {
-        document.getElementsByClassName('elevation-value')[i].textContent = elevation;
-    }};
-
-    // Landing Fee
-if(landingFee !== null) {
-    for (var i= 0; i < document.getElementsByClassName('landing-fee-value').length; i++) {
-        document.getElementsByClassName('landing-fee-value')[i].textContent = landingFee.amount;
-    }};
-    
-    // Traffic
-if(trafficValue !== null) {
-    for (var i= 0; i < document.getElementsByClassName('traffic-value').length; i++) {
-        document.getElementsByClassName('traffic-value')[i].textContent = trafficValue;
-    }};
 
 // Photo
     // Photo in Airport 1
@@ -89,18 +54,6 @@ if(distance1 !== null) {
     document.getElementsByClassName('distance-value-1')[i].textContent = distance1;
 }};
 
-    // Distance between Airport 1 and Airport 3
-if(distance2 !== null) {
-    for (var i= 0; i < document.getElementsByClassName('distance-value-2').length; i++) {
-    document.getElementsByClassName('distance-value-2')[i].textContent = distance2;
-}};
-
-    // Distance between Airport 2 and Airport 3
-if(distance3 !== null) {
-    for (var i= 0; i < document.getElementsByClassName('distance-value-3').length; i++) {
-    document.getElementsByClassName('distance-value-3')[i].textContent = distance3;
-}};
-
 async function wikiGet(num, wikiUrl) {
     const scraperUrl = 
     'http://flip3.engr.oregonstate.edu:6231/?article=';
@@ -108,7 +61,7 @@ async function wikiGet(num, wikiUrl) {
     let response = await fetch(scraperUrl + wikiUrl);
     airportInfo = await response.json();
     for (var i= 0; i < document.getElementsByClassName('airport-info-1').length; i++) {
-        document.getElementsByClassName('airport-info-' + num)[i].textContent = airportInfo.info;
+        document.getElementsByClassName('airport-info-1')[i].textContent = airportInfo.info;
     };
 };
 
