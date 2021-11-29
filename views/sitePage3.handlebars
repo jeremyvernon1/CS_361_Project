@@ -98,10 +98,10 @@
             </div>
 
             {{!-- Fourth row --}}
-            <div id="wikiInfo" class="grid-full-column">
+            <div id="wikiInfo{{@index}}" class="grid-full-column">
                 {{wikipedia_link}}
                 <p>
-                    <span class="airport-info-1"></span>
+                    <span class="airport-info-{{@index}}"></span>
                 </p>
             </div>
         {{!-- End grid container within flexbox --}}

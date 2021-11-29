@@ -6,10 +6,8 @@ const photo3 = "Photo of Airport 3";
 const distance1 = 50;
 const distance2 = 100;
 const distance3 = 75;
-var wikiUrl1 = document.getElementById("wikiInfo").textContent;
-var airport1Info = "";
-const airport2Info = "Airport 2 Info from teammate's Wikipedia scraper.";
-const airport3Info = "Airport 3 Info from teammate's Wikipedia scraper.";
+var airportInfo = "";
+const emptyString = "No Wikipedia article available for this airport.";
 
 async function convert() {
     const getCountries = document.getElementById("toCurrency");
@@ -28,6 +26,7 @@ async function convert() {
 };
 
 // Insert content from variables into HTML output
+    // Landing fee
 for (var i= 0; i < document.getElementsByClassName('landing-fee-value').length; i++) {
     document.getElementsByClassName('landing-fee-value')[i].textContent = landingFee;
 };
@@ -58,36 +57,42 @@ if(distance1 !== null) {
     document.getElementsByClassName('distance-value-1')[i].textContent = distance1;
 }};
 
+// Distance between Airport 2 and Airport 3
+if(distance1 !== null) {
+    for (var i= 0; i < document.getElementsByClassName('distance-value-2').length; i++) {
+    document.getElementsByClassName('distance-value-2')[i].textContent = distance2;
+}};
+
+// Wikipedia Info -from teammate's microservice
 async function wikiGet(num, wikiUrl) {
     const scraperUrl = 
     'http://flip3.engr.oregonstate.edu:6231/?article=';
 
     let response = await fetch(scraperUrl + wikiUrl);
     airportInfo = await response.json();
-    for (var i= 0; i < document.getElementsByClassName('airport-info-1').length; i++) {
-        document.getElementsByClassName('airport-info-1')[i].textContent = airportInfo.info;
+    for (var i= 0; i < document.getElementsByClassName('airport-info-' + num).length; i++) {
+        document.getElementsByClassName('airport-info-' + num)[i].textContent = airportInfo.info;
     };
 };
 
 // Airport Info
+function getWikiArticle(i) {
+    var wikiUrl = document.getElementById("wikiInfo" + i).textContent;
+    wikiUrl = wikiUrl.trim();
+    if(wikiUrl != "") {
+        wikiUrl = wikiUrl.slice(30);
+        console.log("wikiUrl: ", wikiUrl);
+        wikiGet(i, wikiUrl);
+    } else {
+        document.getElementById('wikiInfo' + i).textContent = emptyString;
+    }
+};
+
     // Airport 1
-if(wikiUrl1 !== "") {
-    wikiUrl1 = wikiUrl1.trim();
-    wikiUrl1 = wikiUrl1.slice(30);
-    console.log("wikiUrl1: ", wikiUrl1);
-    wikiGet(1, wikiUrl1);
-} else {
-    console.log("Empty string detected.");
-}
+getWikiArticle(0);
     
     // Airport 2
-if(airport2Info !== null) {
-    var wikiUrl2 = 'Huntsville_International_Airport';
-    wikiGet(2, wikiUrl2);
-};
+getWikiArticle(1);
     
     // Airport 3
-if(airport3Info !== null) {
-    var wikiUrl3 = 'Anchorage_International_Airport';
-    wikiGet(3, wikiUrl3);
-};
+getWikiArticle(2);
