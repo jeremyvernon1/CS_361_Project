@@ -29,13 +29,12 @@
                 {{!-- Landing Fee --}}
                 <div> Landing Fee: </div>
                 <div>
-
-                    <span class="landing-fee-value" id="landing-fee-value"></span> 
+                    <span id="landing_fee_value{{@index}}"></span> 
                 </div>
 
                 <div class="grid-inner-full-column">Convert Currency To:</div>
                 <div>
-                    <select name="toCurrency" id="toCurrency">
+                    <select name="toCurrency" id="toCurrency{{@index}}">
                         <option value=""></option>
                         <option value="Australia">Australia</option>
                         <option value="Brazil">Brazil</option>
@@ -62,7 +61,7 @@
                         <option value="Venezuela">Venezuela</option>
                     </select>
                 </div>
-                <div class="center2"><button onclick="convert()">Convert</button></div>
+                <div class="center2"><button onclick="convert({{@index}})">Convert</button></div>
 
                 {{!-- Traffic --}}
                 <div> Traffic: </div>
@@ -72,36 +71,14 @@
             
             {{!-- Photo --}}
             <div class="grid-item">
-                <span class="photo-1"></span>
+                <span id="photo-{{@index}}"></span>
             </div>
 
-            {{!-- Second row --}}
-            <div class="grid-full-column">
-                Amenities
-            </div>
-
-            {{!-- Third row --}}            
-            {{!-- Distance 1 --}}
-            <div class="grid-item no-bottom-border no-right-border">
-                Distance from Airport 1 to Airport 2:
-            </div>
-            <div class="grid-item no-bottom-border no-left-border">
-                <span class="distance-value-1"></span> miles
-            </div>
-            
-            {{!-- Distance 2 --}}
-            <div class="grid-item no-top-border no-right-border">
-                Distance from Airport 1 to Airport 3:
-            </div>
-            <div class="grid-item no-top-border no-left-border">
-                <span class="distance-value-2"></span> miles
-            </div>
-
-            {{!-- Fourth row --}}
+            {{!-- Last row --}}
             <div id="wikiInfo{{@index}}" class="grid-full-column">
                 {{wikipedia_link}}
                 <p>
-                    <span class="airport-info-{{@index}}"></span>
+                    <span id="airport-info-{{@index}}"></span>
                 </p>
             </div>
         {{!-- End grid container within flexbox --}}
