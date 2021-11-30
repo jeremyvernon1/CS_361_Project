@@ -1,6 +1,6 @@
 .center {
     float: left;
-    width: 33%;
+    width: 32%;
     text-align: center;
 }
 
@@ -31,13 +31,13 @@
 
 .left {
     float: left;
-    width: 34%;
+    width: 32%;
     text-align: left;
 }
 
 .right {
     float: left;
-    width: 30%;
+    width: 33%;
     text-align: right;
 }
 
@@ -47,12 +47,13 @@
 
 .flexbox-container {
     display: flex;
+    word-wrap: break-word;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
 .flexbox-item {
-    max-width: 30%;
+    max-width: 32%;
     min-height: 100px;
 }
 

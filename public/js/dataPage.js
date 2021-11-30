@@ -23,7 +23,9 @@ async function convert(i) {
 // Insert content from variables into HTML output
     // Landing fee
 for (var i= 0; i < 3; i++) {
-    document.getElementById('landing_fee_value' + i).textContent = landingFee;
+    if (document.getElementById('landing_fee_value' + i)) {
+        document.getElementById('landing_fee_value' + i).textContent = landingFee;
+    }
 };
 
 // Distance
@@ -58,11 +60,12 @@ function getWikiArticle(i) {
     wikiUrl = wikiUrl.trim();
     if(wikiUrl != "") {
         wikiUrl = wikiUrl.slice(30);
-        console.log("wikiUrl: ", wikiUrl);
         wikiGet(i, wikiUrl);
     } else {
-        document.getElementById('wikiInfo' + i).textContent = emptyString;
-        document.getElementById('photo-' + i).textContent = "No photo available.";
+        if (document.getElementById('wikiInfo' + i)) {
+            document.getElementById('wikiInfo' + i).textContent = emptyString;
+            document.getElementById('photo-' + i).textContent = "No photo available.";
+        }
     }
 };
 

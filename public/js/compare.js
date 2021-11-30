@@ -25,5 +25,7 @@ function compare() {
             resultValues += tempValue;
         }
     }
+    event.preventDefault();
     window.location.href = "/sitePage3" + resultValues;
+    return false;
 }
