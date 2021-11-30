@@ -29,7 +29,7 @@ function getAirports(res, mysql, context){
 
 function getAirportsByState(res, mysql, selectedState, context){
     var callbackCount = 0;
-    mysql.pool.query("SELECT name, ID FROM airports WHERE iso_region = " + selectedState,
+    mysql.pool.query("SELECT name, ID, ident FROM airports WHERE iso_region = " + selectedState,
         function(error, results){
             if(error){
                 console.log("Error in mySQL.", error);
@@ -37,14 +37,55 @@ function getAirportsByState(res, mysql, selectedState, context){
             context.airports = results;
             callbackCount++;
             if (callbackCount > 0) {
-                res.render('sitePage1', context);
+                res.render('sitePage1', context, largeAirports);
+        }
+    })
+};
+
+const stateAbbreviations = [
+    'AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FM','FL','GA',
+    'GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MH','MD','MA',
+    'MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND',
+    'MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT',
+    'VT','VI','VA','WA','WV','WI','WY'
+   ];
+
+function buildStateLists(context) {
+    for (i = 0; i < stateAbbreviations.length; i++) {
+        eval("context." + stateAbbreviations[i] + "= {}");
+    }
+    
+    k = 0;
+    for (i = 0; i < context.length; i++) {
+        for (j = 0; j < stateAbbreviations.length; j++) {
+            if (context[i].iso_region == "US-" + stateAbbreviations[j]) {
+                eval("context." + stateAbbreviations[j] + "[k] = context[i]");
+                k++;
+            }
+        }
+    }
+    return context;
+}
+
+function getLargeAirports(res, mysql, context){
+    var callbackCount = 0;
+    mysql.pool.query("SELECT name, ID, ident, iso_region FROM airports \
+    WHERE type = 'large_airport'",
+        function(error, results){
+            if(error){
+                console.log("Error in mySQL.", error);
+            }
+            context = buildStateLists(results);
+            callbackCount++;
+            if (callbackCount > 0) {
+                res.render('sitePage2', context);
         }
     })
 };
 
 function getAirportsBySearch(res, mysql, searchString, context){
     var callbackCount = 0;
-    mysql.pool.query("SELECT name, ID FROM airports WHERE name LIKE " + searchString,
+    mysql.pool.query("SELECT name, ID, ident FROM airports WHERE name LIKE " + searchString,
         function(error, results){
             if(error){
                 console.log("Error in mySQL.", error);
@@ -93,7 +134,9 @@ app.get('/sitePage1', (req, res) => {
 });
 
 app.get('/sitePage2', (req, res) => {
-    res.render('sitePage2');
+    var context = {};
+    var mysql = req.app.get('mysql');
+    getLargeAirports(res, mysql, context);
 });
 
 app.get('/sitePage3', (req, res) => {
