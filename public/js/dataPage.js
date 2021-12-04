@@ -28,19 +28,6 @@ for (var i= 0; i < 3; i++) {
     }
 };
 
-// Distance
-    // Distance between Airport 1 and Airport 2
-if(distance1 !== null) {
-    for (var i= 0; i < document.getElementsByClassName('distance-value-1').length; i++) {
-    document.getElementsByClassName('distance-value-1')[i].textContent = distance1;
-}};
-
-// Distance between Airport 2 and Airport 3
-if(distance1 !== null) {
-    for (var i= 0; i < document.getElementsByClassName('distance-value-2').length; i++) {
-    document.getElementsByClassName('distance-value-2')[i].textContent = distance2;
-}};
-
 // Wikipedia Info -from teammate's microservice
 async function wikiGet(num, wikiUrl) {
     const scraperUrl = 
