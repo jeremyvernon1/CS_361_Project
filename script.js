@@ -3,7 +3,7 @@ const app = express();
 const handlebars = require('express-handlebars').create({defalutLayout:'main'});
 const mysql = require('./dbcon.js');
 
-// Renders pages
+// Engines
 app.use(express.static('public'));
 app.use(express.static('images'));
 app.use(express.json());
@@ -12,21 +12,7 @@ app.set('view engine', 'handlebars');
 app.set('mysql', mysql);
 app.set('port', process.argv[2]);
 
-
-function getAirports(res, mysql, context){
-    var callbackCount = 0;
-    mysql.pool.query("SELECT * FROM airports", function(error, results){
-        if(error){
-            console.log("Error in mySQL.", error);
-        }
-        context.airports = results;
-        callbackCount++;
-        if (callbackCount > 0) {
-            res.render('sitePage2', context);
-        }
-    })
-};
-
+// SQL Queries
 function getAirportsByState(res, mysql, selectedState, context){
     var callbackCount = 0;
     mysql.pool.query("SELECT name, ID, ident FROM airports WHERE iso_region = " + selectedState,
@@ -42,19 +28,22 @@ function getAirportsByState(res, mysql, selectedState, context){
     })
 };
 
-const stateAbbreviations = [
-    'AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FM','FL','GA',
-    'GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MH','MD','MA',
-    'MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND',
-    'MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT',
-    'VT','VI','VA','WA','WV','WI','WY'
-   ];
-
 function buildStateLists(context) {
+
+    const stateAbbreviations = [
+        'AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FM','FL','GA',
+        'GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MH','MD','MA',
+        'MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND',
+        'MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT',
+        'VT','VI','VA','WA','WV','WI','WY'
+       ];
+    
+    // Creates an empty list for each state 
     for (i = 0; i < stateAbbreviations.length; i++) {
         eval("context." + stateAbbreviations[i] + "= {}");
     }
     
+    // Loops through each entry of large airports and adds it to the appropriate state list
     k = 0;
     for (i = 0; i < context.length; i++) {
         for (j = 0; j < stateAbbreviations.length; j++) {
@@ -115,7 +104,7 @@ function getAirportsByID(res, mysql, selectedResults, context){
     )
 };
 
-
+// Renders pages
 app.get('/', (req, res) => {
     res.render('home');
 });

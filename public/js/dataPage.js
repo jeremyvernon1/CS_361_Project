@@ -1,12 +1,12 @@
 // Declare variables
-var landingFee = "$250.00";
-const distance1 = 50;
-const distance2 = 100;
-const distance3 = 75;
+const MAX_RESULTS = 3;
+var landingFee = "$250.00"; /* Hack: Was not able to find a SQL database or large
+                                publication of landing fees. Plan to update in the future. */
 var airportInfo = "";
 const emptyString = "No Wikipedia article available for this airport.";
 
 async function convert(i) {
+    // Uses Microservice
     const getCountries = document.getElementById("toCurrency" + i);
     const receiveCountry = getCountries.options[getCountries.selectedIndex].value
     
@@ -69,11 +69,7 @@ function getWikiArticle(i) {
     }
 };
 
-    // Airport 1
-getWikiArticle(0);
-    
-    // Airport 2
-getWikiArticle(1);
-    
-    // Airport 3
-getWikiArticle(2);
+    // Get Wikipedia article for airports
+for (i = 0; i < MAX_RESULTS; i++) {
+    getWikiArticle(i);
+}

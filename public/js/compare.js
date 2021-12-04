@@ -1,3 +1,5 @@
+const MAX_RESULTS = 3;
+
 function compare() {
     var form = document.getElementById("searchResults");
     const checkedArr = [];
@@ -9,8 +11,8 @@ function compare() {
         }
     });
     // Check if more than 3 selected
-    if (checkedArr.length > 3) {
-        window.alert("Please select no more than 3 airports.");
+    if (checkedArr.length > MAX_RESULTS) {
+        window.alert("Please select no more than " + MAX_RESULTS + " airports.");
     }
     
     // Route to new page
@@ -25,7 +27,7 @@ function compare() {
             resultValues += tempValue;
         }
     }
-    event.preventDefault();
+    event.preventDefault(); // Redirect from State page does not work without.
     window.location.href = "/sitePage3" + resultValues;
     return false;
 }
